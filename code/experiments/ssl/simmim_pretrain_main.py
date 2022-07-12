@@ -1,15 +1,6 @@
-import os, sys, inspect
-
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-gparentdir = os.path.dirname(parentdir)
-sys.path.append(parentdir)
-sys.path.append(gparentdir)
-
 import torch
 import pytorch_lightning as pl
 from pytorch_lightning.utilities.cli import LightningCLI
-from pytorch_lightning.utilities.cli import MODEL_REGISTRY
 
 from models import ViTSimMIM
 from torch.nn import L1Loss
@@ -19,7 +10,6 @@ import data
 import optimizers
 
 
-@MODEL_REGISTRY
 class SimMIMtrainer(pl.LightningModule):
     """Pretraining on 3D Imaging with Masked Auto Encoder"""
 

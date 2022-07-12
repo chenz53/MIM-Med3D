@@ -1,11 +1,4 @@
 from typing import Union, Optional, Sequence
-import os, sys, inspect
-
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-gparentdir = os.path.dirname(parentdir)
-sys.path.append(parentdir)
-sys.path.append(gparentdir)
 
 from monai.losses import DiceCELoss
 from monai.inferers import sliding_window_inference
@@ -25,10 +18,9 @@ import pytorch_lightning as pl
 
 # from pytorch_lightning import Trainer
 # from pytorch_lightning.loggers import MLFlowLogger
-from pytorch_lightning.utilities.cli import MODEL_REGISTRY, LightningCLI
+from pytorch_lightning.utilities.cli import LightningCLI
 
 
-@MODEL_REGISTRY
 class SingleSegtrainer(pl.LightningModule):
     def __init__(self, num_classes: int, model_name: str, model_dict: dict):
         super().__init__()

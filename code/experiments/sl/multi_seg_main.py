@@ -1,11 +1,3 @@
-import os, sys, inspect
-
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-gparentdir = os.path.dirname(parentdir)
-sys.path.append(parentdir)
-sys.path.append(gparentdir)
-
 from monai.losses import DiceCELoss
 from monai.inferers import sliding_window_inference
 from monai.metrics import DiceMetric
@@ -17,12 +9,11 @@ from monai.transforms import Compose, Activations, AsDiscrete, EnsureType
 import numpy as np
 import torch
 import pytorch_lightning as pl
-from pytorch_lightning.utilities.cli import MODEL_REGISTRY, LightningCLI
+from pytorch_lightning.utilities.cli import LightningCLI
 import data
 import optimizers
 
 
-@MODEL_REGISTRY
 class MultiSegtrainer(pl.LightningModule):
     def __init__(
         self, model_name: str, model_dict: dict,

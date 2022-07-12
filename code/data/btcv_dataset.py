@@ -3,7 +3,6 @@ from typing import Optional, Sequence, Union
 import torch
 import torch.distributed as ptdist
 import pytorch_lightning as pl
-from pytorch_lightning.utilities.cli import DATAMODULE_REGISTRY
 
 from monai.data import (
     CacheDataset,
@@ -34,7 +33,6 @@ from monai.transforms import (
 from monai.data.utils import pad_list_data_collate
 
 
-@DATAMODULE_REGISTRY
 class BTCVDataset(pl.LightningDataModule):
     def __init__(
         self,

@@ -1,11 +1,3 @@
-import os, sys, inspect
-
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-gparentdir = os.path.dirname(parentdir)
-sys.path.append(parentdir)
-sys.path.append(gparentdir)
-
 import data
 import optimizers
 from models import ViTAutoEnc
@@ -14,10 +6,8 @@ from torch.nn import L1Loss
 
 import pytorch_lightning as pl
 from pytorch_lightning.utilities.cli import LightningCLI
-from pytorch_lightning.utilities.cli import MODEL_REGISTRY
 
 
-@MODEL_REGISTRY
 class SimCLRtrainer(pl.LightningModule):
     def __init__(
         self, batch_size: int, temperature: float, model_name: str, model_dict: dict
